@@ -1,11 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background-color: #2A2A2A;
+  /* Charcoal Black */
+  --headline-color: #FFD700;
+  /* Golden Yellow */
+  --paragraph-color: #EAEAEA;
+  /* Soft Light Gray */
+  --link-color: #6A5ACD;
+  /* Royal Blue */
+  --card-background-color: #4B2E83;
+  /* Deep Purple */
+  --card-headline-color: #832E3B;
+  /* --card-headline-color: #FF4500; */
+  /* Gryffindor Scarlet Red */
+  --card-paragraph-color: #D1C4E9;
+  /* Lavender Gray */
+  /*TODO colors cleanup and refinement*/
+
+  --font-headline: "Cinzel", serif;
+  --font-paragraph: "Lora", serif;
+  --font-button: "Raleway", sans-serif;
+
+
+  font-family: var(--font-paragraph);
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
+  color-scheme: dark;
+  color: var(--paragraph-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +40,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--link-color);
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: var(--link-color);
 }
 
 body {
@@ -28,11 +54,15 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  cursor: url("/magic-wand.svg"), auto;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: var(--font-headline);
+  color: var(--headline-color)
 }
 
 button {
@@ -46,23 +76,12 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--link-color);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

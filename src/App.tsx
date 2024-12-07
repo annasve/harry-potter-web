@@ -1,35 +1,107 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Character from './types/Attributes';
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+import Home from './components/Home/Home';
+import Detail from './components/Detail/Detail';
+
+interface ApiResponse {
+  data: Character[];
+  links: {
+    current: string;
+    last?: string;
+    next?: string;
+    self: string;
+  };
+  meta: {
+    copyright: string;
+    generated_at: string;
+    pagination: {
+      current: number;
+      last?: number;
+      next?: number;
+      record: number;
+    };
+  };
 }
 
-export default App
+function App() {
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  //Retrieve all characters for one Catalog page
+  useEffect(() => {
+    const pageSize: number = 25; //TODO L8ER: let user choose from 3 pageSizes
+    const fetchData = async () => {
+      const url = `https://api.potterdb.com/v1/characters?page[size]=${pageSize}&page[number]=${pageNumber}`;
+
+      //Try-catch block
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const res = (await response.json()) as ApiResponse;
+        const data: Character[] = res.data;
+
+        //(last page of API results has a specific data[] length and no meta.pagination.last property)
+        let lastPage = false;
+        if (res.meta.pagination.last === undefined) {
+          lastPage = true;
+          setTotalPages(res.meta.pagination.current);
+        } else {
+          setTotalPages(res.meta.pagination.last);
+        }
+
+        //Build an array with information for all characters (1 item = info for one character)
+        const charactersArray: Character[] = [];
+        if (data) {
+          for (
+            let index = 0;
+            index < (lastPage ? data.length : pageSize);
+            index++
+          ) {
+            const itemInfo = data[index] || {};
+            charactersArray.push(itemInfo);
+          }
+        }
+        setCharacters(charactersArray);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [pageNumber]);
+
+  //Move between pages
+  const handlePagination = (num: number) => {
+    setPageNumber((prevPageNumber) => prevPageNumber + num);
+  };
+
+  return (
+    <BrowserRouter>
+      <div id="app-wrapper">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                totalPages={totalPages}
+                handlePagination={handlePagination}
+                pageNumber={pageNumber}
+                attributes={characters}
+              />
+            }
+          />
+          <Route path="/character/:id" element={<Detail />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
