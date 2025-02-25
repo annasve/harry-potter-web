@@ -85,3 +85,38 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.searchbar {
+  margin: 24px;
+  display: inline-grid;
+  grid-template-columns: minmax(100px, 250px) 50px;
+  align-items: center;
+  justify-items: center;
+}
+
+.search-input {
+  padding: 0 8px;
+  border-radius: 8px;
+  min-height: 36px;
+  background: linear-gradient(135deg, hsla(248, 53%, 58%, 1) 0%, hsla(180, 2%, 63%, 1) 68%);
+  font-size: 16px;
+  line-height: 18px;
+  border: 2px solid var(--card-paragraph-color);
+  font-weight: normal;
+  font-family: inherit;
+  color: var(--headline-color);
+}
+
+.search-icon {
+  color: var(--card-paragraph-color);
+  font-size: 20px;
+}
+
+.search-button {
+  border: 2px solid var(--card-paragraph-color);
+  background: linear-gradient(135deg, hsla(248, 53%, 58%, 1) 0%, #ffd9006d 68%);
+}
+
+.search-button:hover {
+  border-color: var(--headline-color);
+}
