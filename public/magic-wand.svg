@@ -2,7 +2,7 @@
 
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="25px" height="25px" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet">
-
+<g transform="rotate(90, 64, 64)">
 <linearGradient id="IconifyId17ecdb2904d178eab10083" gradientUnits="userSpaceOnUse" x1="50.039" y1="68.904" x2="58.797" y2="68.904" gradientTransform="rotate(45.001 55.992 74.727) scale(1 1.1165)">
 
 <stop offset=".595" stop-color="#616161">
@@ -190,5 +190,5 @@
 <path d="M67.78 35.64c-11.25 2.62-24.16-5-36.08-3.66c-4.55.6-6.42 6.04-2.05 14.66c8.58 14.77 21.1 23.49 25.72 28.9c-6.21-3.48-18.97-12.65-27.84-21.28c-13.35-12.8-10.88-28.8 1.5-28.75c4.15-.4 12.18 1.6 15.54 2.83c3.31 1.33 14.58 6.24 23.21 7.3z" fill="url(#IconifyId17ecdb2904d178eab10091)">
 
 </path>
-
+</g>
 </svg>
